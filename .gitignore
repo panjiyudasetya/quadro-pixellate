@@ -34,5 +34,6 @@ proguard/
 
 # Credentials
 *.jks
-/auth.xml
-/*keystore.properties
+/app/src/main/res/values/auth.xml
+*keystore.properties
+*keystore_debug.properties

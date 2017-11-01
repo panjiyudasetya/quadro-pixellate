@@ -1,6 +1,27 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+/**
+ * Create a variable called keystorePropertiesFile, and initialize it to your
+ * keystore.properties file, in the rootProject folder.
+ */
+def releaseKeystoreProps = rootProject.file("keystore.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def releaseKeystoreProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+releaseKeystoreProperties.load(new FileInputStream(releaseKeystoreProps))
+
+
+def debugKeystoreProps = rootProject.file("keystore_debug.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def debugKeystoreProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+debugKeystoreProperties.load(new FileInputStream(debugKeystoreProps))
+
 buildscript {
     ext {
         support_libs = '26.0.0-alpha1'
@@ -15,13 +36,35 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            keyAlias debugKeystoreProperties['keyAlias']
+            keyPassword debugKeystoreProperties['keyPassword']
+            storeFile file(debugKeystoreProperties['storeFile'])
+            storePassword debugKeystoreProperties['storePassword']
+        }
+        release {
+            keyAlias releaseKeystoreProperties['keyAlias']
+            keyPassword releaseKeystoreProperties['keyPassword']
+            storeFile file(releaseKeystoreProperties['storeFile'])
+            storePassword releaseKeystoreProperties['storePassword']
+        }
+    }
     buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            resValue "string", "app_name", "Quadro Pixellate Debug"
+        }
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "app_name", "Quadro Pixellate"
         }
     }
 }
