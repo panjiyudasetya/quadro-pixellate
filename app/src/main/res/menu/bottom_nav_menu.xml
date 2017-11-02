@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_timeline"
+        android:enabled="true"
+        android:icon="@drawable/ic_timeline_24dp"
+        android:title="@string/menu_timeline"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_trending"
+        android:enabled="true"
+        android:icon="@drawable/ic_popular_24dp"
+        android:title="@string/menu_trending"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_collection"
+        android:enabled="true"
+        android:icon="@drawable/ic_collections_24dp"
+        android:title="@string/menu_collection"
+        app:showAsAction="always" />
+</menu>

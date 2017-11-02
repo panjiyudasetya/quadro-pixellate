@@ -1,1 +1,5 @@
-<resources></resources>
+<resources>
+    <string name="menu_timeline">Timeline</string>
+    <string name="menu_trending">Trending</string>
+    <string name="menu_collection">Collections</string>
+</resources>
